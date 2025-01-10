@@ -8,14 +8,14 @@ This guide provides detailed instructions for integrating the onboarding process
 
 ## Table of Contents
 
-1. [Add Maven Repositories](#add-maven-repositories)
-2. [MainActivity Setup](#mainactivity-setup)
-3. [Dependencies](#dependencies)
-4. [Library Versions](#library-versions)
+1. [Step 1: Add Maven Repositories](#step-1-add-maven-repositories)
+2. [Step 2: MainActivity Setup](#step-2-mainactivity-setup)
+3. [Step 3: Add Dependencies](#step-3-add-dependencies)
+4. [Step 4: Define Library Versions](#step-4-define-library-versions)
 
 ---
 
-## Add Maven Repositories
+## Step 1: Add Maven Repositories
 
 Add the following code to your `settings.gradle.kts` file to include the required Maven repositories:
 
@@ -34,30 +34,31 @@ dependencyResolutionManagement {
         }
     }
 }
+```
 
-MainActivity Setup
-To launch the onboarding process in your application, add the following code to your MainActivity.kt:
+## Step 2: MainActivity Setup
 
-kotlin
-Copy code
+To launch the onboarding process in your application, add the following code to your `MainActivity.kt`:
+
+```kotlin
 val openAccountManager = OpenAccountManager.initialize(
-    emailId = "muyiwa@gmail.com", 
-    custId = "5678", 
-    tenantId = "1234"
+    emailId = "your_email@gmail.com", 
+    custId = "your_customer_id", 
+    tenantId = "your_tenant_id"
 )
 openAccountManager.openOnBoarding(this)
+```
+
 Replace the placeholder values with actual customer-specific details:
+- `emailId`: Customer's email address
+- `custId`: Customer ID
+- `tenantId`: Tenant ID
 
-emailId: Customer's email address
-custId: Customer ID
-tenantId: Tenant ID
+## Step 3: Add Dependencies
 
+Add the required dependencies to your `app/build.gradle.kts` file:
 
-Dependencies
-Add the required dependencies to your app/build.gradle.kts file:
-
-kotlin
-Copy code
+```kotlin
 implementation(libs.verifyedsdk)
 implementation(libs.ssp) // Scalable text sizes
 implementation(libs.sdp) // Scalable dimensions
@@ -89,11 +90,13 @@ implementation(libs.coil)
 implementation(libs.maps.compose)
 implementation(libs.maps.compose.utils)
 implementation(libs.maps.compose.widgets)
-Library Versions
-Include the following versions in your libs.versions.toml file:
+```
 
-toml
-Copy code
+## Step 4: Define Library Versions
+
+Include the following versions in your `libs.versions.toml` file:
+
+```toml
 [versions]
 verifyedsdk = "1.0.1"
 ssp = "1.1.1"
@@ -138,16 +141,6 @@ androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "mult
 security-crypto-ktx = { group = "androidx.security", name = "security-crypto", version.ref = "securityCryptoKtx" }
 glide = { module = "com.github.bumptech.glide:compose", version.ref = "glide" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
-jsdp = { group = "network.chaintech", name = "sdp-ssp-compose-multiplatform", version.ref = "jsdp" }
-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logginginterceptor" }
-play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
-hyperverge = { group = "co.hyperverge", name = "hyperkyc", version.ref = "hyperverge" }
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
 maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "mapsComposeVersion" }
-maps-compose-utils = { group = "com.google.maps.android", name = "maps-compose-utils", version.ref = "mapsUtilsKtx" }
-maps-compose-widgets = { group = "com.google.maps.android", name = "maps-compose-widgets", version.ref = "mapsUtilsKtx" }
+```
